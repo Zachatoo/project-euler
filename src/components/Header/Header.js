@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './Header.module.scss';
 
 import { AppContext } from '../../hoc/AppContext/AppContext';
 
@@ -8,7 +9,7 @@ const Header = (props) => {
   const [globalState, setGlobalState] = useContext(AppContext);
 
   return (
-    <div className="bg-green-200">
+    <div className={styles.header}>
       <div className="flex-1 min-w-0">
         <Button
           className="pl-1"
