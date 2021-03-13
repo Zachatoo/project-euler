@@ -17,6 +17,14 @@ export const problems = [
       }
       return result.join(', ');
     },
+    codeStringified:
+`const MAX_NUM = 1000;
+let result = [];
+for (let i = 1; i < MAX_NUM; ++i) {
+  if (i % 3 === 0 || i % 5 === 0)
+    result.push(i);
+}
+return result.join(', ');`,
     completed: 1,
   },
   {

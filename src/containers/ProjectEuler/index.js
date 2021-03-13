@@ -21,7 +21,7 @@ const ProjectEuler = (props) => {
           {!!visibleProblem.code &&
           <div className="max-w-3xl mx-auto mb-1">
             <CodeSnippet>
-              {`${visibleProblem.code.toString()}`}
+              {`${visibleProblem.codeStringified || visibleProblem.code?.toString()}`}
             </CodeSnippet>
             <CodeRunner code={visibleProblem.code} />
           </div>}
