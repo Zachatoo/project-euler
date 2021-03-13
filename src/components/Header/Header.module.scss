@@ -1,3 +1,5 @@
-.header {
-  background-color: var(--antique-brass);
+.date {
+  @media (max-width: 540px) {
+    display: none;
+  }
 }

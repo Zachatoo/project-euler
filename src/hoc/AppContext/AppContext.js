@@ -3,6 +3,7 @@ import React, { createContext, useState } from 'react';
 const DEFAULT_STATE = {
   completedProblems: 0,
   totalProblems: 100,
+  sidebarOpen: false,
 };
 
 export const AppContext = createContext();

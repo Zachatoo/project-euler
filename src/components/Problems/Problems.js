@@ -8,6 +8,13 @@ const problems = [
         <p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
       </>,
     completed: 0,
+    code: () => {
+      console.log('test');
+      if (true) {
+        console.log('loooooooooooooooooooooooooong text');
+      }
+      return null;
+    },
   },
   {
     key: 2,
@@ -19,6 +26,9 @@ const problems = [
         <p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</p>
       </>,
     completed: 0,
+    code: () => {
+
+    },
   },
   {
     key: 3,
@@ -29,6 +39,9 @@ const problems = [
         <p>What is the largest prime factor of the number 600851475143 ?</p>
       </>,
     completed: 0,
+    code: () => {
+
+    },
   },
 ];
 
