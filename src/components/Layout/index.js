@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 
 import { AppContext } from '../../hoc/AppContext/AppContext'
-import Header from '../Header/Header';
-import Sidebar from '../Sidebar/Sidebar';
+import Header from '../Header';
+import Sidebar from '../Sidebar';
 
-const Layout = (props) => {
+export const Layout = ({ children }) => {
   const [globalState, setGlobalState] = useContext(AppContext);
 
   return (
-    <div className="fixed bg-gray-50 h-screen w-screen">
+    <div className="bg-gray-50 min-h-screen min-w-screen overflow-hidden">
       <Header />
       <main>
-        {props.children}
+        { children }
       </main>
     </div>
   );

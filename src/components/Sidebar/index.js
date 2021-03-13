@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { AppContext } from '../../hoc/AppContext/AppContext'
 
-const Sidebar = (props) => {
+export const Sidebar = (props) => {
   const [globalState, setGlobalState] = useContext(AppContext);
   const [xPosition, setXPosition] = useState(-props.width);
 

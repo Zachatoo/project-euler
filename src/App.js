@@ -5,8 +5,8 @@ import './App.scss';
 import './index.css';
 
 import { AppProvider } from './hoc/AppContext/AppContext';
-import Layout from './components/Layout/Layout';
-import ProjectEuler from './containers/ProjectEuler/ProjectEuler';
+import Layout from './components/Layout';
+import ProjectEuler from './containers/ProjectEuler';
 
 const iconList = Object
   .keys(Icons)

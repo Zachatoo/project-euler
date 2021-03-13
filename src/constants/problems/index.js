@@ -1,20 +1,23 @@
-const problems = [
+export const problems = [
   {
     key: 1,
     title: 'Multiples of 3 and 5',
     prompt:
       <>
-        <p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+        <p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.<br />
+        The sum of these multiples is 23.</p>
         <p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
       </>,
-    completed: 0,
     code: () => {
-      console.log('test');
-      if (true) {
-        console.log('loooooooooooooooooooooooooong text');
+      const MAX_NUM = 1000;
+      let result = [];
+      for (let i = 1; i < MAX_NUM; ++i) {
+        if (i % 3 === 0 || i % 5 === 0)
+          result.push(i);
       }
-      return null;
+      return result.join(', ');
     },
+    completed: 1,
   },
   {
     key: 2,
@@ -25,10 +28,10 @@ const problems = [
         <p className="center">1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...</p>
         <p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</p>
       </>,
-    completed: 0,
     code: () => {
-
+      return null;
     },
+    completed: 0,
   },
   {
     key: 3,
@@ -38,10 +41,10 @@ const problems = [
         <p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
         <p>What is the largest prime factor of the number 600851475143 ?</p>
       </>,
-    completed: 0,
     code: () => {
-
+      return null;
     },
+    completed: 0,
   },
 ];
 
