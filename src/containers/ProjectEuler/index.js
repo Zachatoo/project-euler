@@ -1,13 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { AppContext } from '../../hoc/AppContext/AppContext'
 import { Header, CodeSnippet, CodeRunner, Sidebar } from '../../components';
 import { problems } from '../../constants';
 
+const DEFAULT_PROBLEM_COUNT = {
+  completedProblems: 0,
+  totalProblems: 100,
+};
+
 const ProjectEuler = (props) => {
-  const [globalState, setGlobalState] = useContext(AppContext);
-  const [visibleProblem, setVisibleProblem] = useState(problems[0]);
+  const [problemCount, setProblemCount] = useState(DEFAULT_PROBLEM_COUNT);
+  const [visibleProblem, setVisibleProblem] =
+    useState(problems[
+      localStorage.getItem('currentProblem') - 1 || 0
+    ]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    let tempProblemCount = {...problemCount};
+    let completed = 0;
+    problems.forEach(problem => {
+      if (problem.completed)
+        completed++;
+    });
+    tempProblemCount.completedProblems = completed;
+    setProblemCount(tempProblemCount);
+  }, [problems]);
+
+  useEffect(() => {
+    toggleSidebar(false);
+    if (visibleProblem)
+      localStorage.setItem('currentProblem', visibleProblem.key);
+    else
+      localStorage.removeItem('currentProblem');
+  }, [visibleProblem]);
 
   const toggleSidebar = (state) => {
     setIsSidebarOpen(state ?? !isSidebarOpen);
@@ -15,7 +41,7 @@ const ProjectEuler = (props) => {
 
   const selectProblem = (problem) => {
     setVisibleProblem(problem);
-    toggleSidebar();
+    toggleSidebar(false);
   }
 
   return (
@@ -25,7 +51,7 @@ const ProjectEuler = (props) => {
         select={selectProblem}
         toggle={toggleSidebar}
       />
-      <Header toggleSidebar={toggleSidebar} />
+      <Header toggleSidebar={toggleSidebar} problemCount={problemCount} />
       <div className="max-w-4xl mt-20 mx-auto p-4">
         {visibleProblem ?
         <>

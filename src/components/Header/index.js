@@ -1,13 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Header.module.scss';
 
-import { AppContext } from '../../hoc/AppContext/AppContext';
 
-export const Header = ({ toggleSidebar }) => {
-  const [globalState, ] = useContext(AppContext);
-
+export const Header = ({ toggleSidebar, problemCount }) => {
   return (
     <div className="fixed w-full top-0 pt-2 pb-1 text-gray-700 bg-blue-300">
       <Button
@@ -28,7 +25,7 @@ export const Header = ({ toggleSidebar }) => {
           </div>
           <div className="mt-2 flex items-center">
             <FontAwesomeIcon icon="check" />
-            <span className="text-gray-600 pl-2">{globalState.completedProblems} out of {globalState.totalProblems}</span>
+            <span className="text-gray-600 pl-2">{problemCount.completedProblems} out of {problemCount.totalProblems}</span>
           </div>
           <div className={`${styles.date} mt-2 flex items-center`}>
             <FontAwesomeIcon icon="calendar-alt" />

@@ -16,11 +16,12 @@ export const CodeRunner = ({ code }) => {
     setIsResultVisible(true);
     setIsLoading(false);
   }
-
+  
   const clear = () => {
     setResult(null);
     setIsResultVisible(false);
   }
+  useEffect(clear, [code]);
 
   return (
     <>
