@@ -5,23 +5,18 @@ import styles from './Header.module.scss';
 
 import { AppContext } from '../../hoc/AppContext/AppContext';
 
-const Header = (props) => {
-  const [globalState, setGlobalState] = useContext(AppContext);
-
-  const toggleSidebar = () => {
-    const tempGlobalState = {...globalState};
-    const sidebarOpen = tempGlobalState.sidebarOpen;
-    setGlobalState({...tempGlobalState, sidebarOpen: !sidebarOpen});
-  }
+export const Header = ({ toggleSidebar }) => {
+  const [globalState, ] = useContext(AppContext);
 
   return (
     <div className="fixed w-full top-0 pt-2 pb-1 text-gray-700 bg-blue-300">
-      {/* <button
-        className="rounded-lg ml-1 mt-1 p-1 hover:bg-blue-400 focus:ring-0"
+      <Button
+        className="fixed ml-1 p-1"
+        variant="link"
         onClick={toggleSidebar}
       >
-        <FontAwesomeIcon icon="bars" className="text-xl" />
-      </button> */}
+        <FontAwesomeIcon icon="bars" className="text-lg" />
+      </Button>
       <h2 className="text-center text-2xl font-bold leading-8 xs:text-3xl">
         Project Euler
       </h2>

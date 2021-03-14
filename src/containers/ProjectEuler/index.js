@@ -1,15 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { AppContext } from '../../hoc/AppContext/AppContext'
-import { CodeSnippet, CodeRunner, LoadingIcon } from '../../components';
+import { Header, CodeSnippet, CodeRunner, Sidebar } from '../../components';
 import { problems } from '../../constants';
 
 const ProjectEuler = (props) => {
   const [globalState, setGlobalState] = useContext(AppContext);
   const [visibleProblem, setVisibleProblem] = useState(problems[0]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = (state) => {
+    setIsSidebarOpen(state ?? !isSidebarOpen);
+  }
+
+  const selectProblem = (problem) => {
+    setVisibleProblem(problem);
+    toggleSidebar();
+  }
 
   return (
+    <>
+      <Sidebar
+        open={isSidebarOpen}
+        select={selectProblem}
+        toggle={toggleSidebar}
+      />
+      <Header toggleSidebar={toggleSidebar} />
       <div className="max-w-4xl mt-20 mx-auto p-4">
         {visibleProblem ?
         <>
@@ -32,6 +48,7 @@ const ProjectEuler = (props) => {
           the use of a computer and programming skills will be required to solve most problems.
         </div>}
       </div>
+    </>
   );
 }
 
