@@ -25,7 +25,7 @@ for (let i = 1; i < MAX_NUM; ++i) {
     result.push(i);
 }
 return result.join(', ');`,
-    completed: 1,
+    completed: true,
   },
   {
     key: 2,
@@ -37,9 +37,31 @@ return result.join(', ');`,
         <p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</p>
       </>,
     code: () => {
-      return null;
+      const MAX_NUM = 4000000;
+      let prevNum = 1;
+      let nextNum = 1;
+      let sum = 0;
+      while (nextNum <= MAX_NUM) {
+        if (nextNum % 2 === 0)
+          sum += nextNum;
+        prevNum = nextNum - prevNum;
+        nextNum += prevNum;
+      }
+      return sum;
     },
-    completed: 0,
+    codeStringified:
+`const MAX_NUM = 4000000;
+let prevNum = 1;
+let nextNum = 1;
+let sum = 0;
+while (nextNum <= MAX_NUM) {
+  if (nextNum % 2 === 0)
+    sum += nextNum;
+  prevNum = nextNum - prevNum;
+  nextNum += prevNum;
+}
+return sum;`,
+    completed: true,
   },
   {
     key: 3,
@@ -47,13 +69,17 @@ return result.join(', ');`,
     prompt:
       <>
         <p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
-        <p>What is the largest prime factor of the number 600851475143 ?</p>
+        <p>What is the largest prime factor of the number 600851475143?</p>
       </>,
     code: () => {
-      return null;
+      const MAX_NUM = 13195;
+      let result = 3;
+      for(let i = 3; i < MAX_NUM; ++i) {
+        if (i > result && MAX_NUM % i === 0)
+          result = i;
+      }
+      return result;
     },
-    completed: 0,
+    completed: false,
   },
 ];
-
-export default problems;

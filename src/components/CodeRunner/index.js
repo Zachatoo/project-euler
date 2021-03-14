@@ -46,7 +46,7 @@ export const CodeRunner = ({ code }) => {
           </Button>}
         </>
       </div>
-      <Collapse in={isResultVisible && result}>
+      <Collapse in={isResultVisible && !!result}>
         <div className="bg-gray-300 w-full rounded-md px-2">
           {result}
         </div>

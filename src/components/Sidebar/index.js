@@ -1,15 +1,14 @@
 import React from 'react';
 
 import { Overlay } from '../Overlay';
-import problems from '../../constants/problems';
+import { problems } from '../../constants';
 
 export const Sidebar = ({ open, select, toggle }) => {
-
   return (
     <>
       <div
         className={
-          `fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform border-r-2 bg-gray-100 pt-2
+          `fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform border-r-2 bg-gray-100
           ${open ? "ease-out translate-x-0" : "ease-in -translate-x-full"}`}
       >
         <div
