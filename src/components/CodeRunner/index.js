@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Collapse } from 'react-bootstrap';
 
 import { LoadingIcon } from '../../components';
 
@@ -46,10 +46,11 @@ export const CodeRunner = ({ code }) => {
           </Button>}
         </>
       </div>
-      {(isResultVisible && result) &&
-      <div className="flex bg-gray-300 w-full rounded-md px-2">
-        {result}
-      </div>}
+      <Collapse in={isResultVisible && result}>
+        <div className="bg-gray-300 w-full rounded-md px-2">
+          {result}
+        </div>
+      </Collapse>
     </>
   );
 }
