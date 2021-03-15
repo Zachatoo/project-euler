@@ -7,14 +7,26 @@ export const CodeRunner = ({ code }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [result, setResult] = useState();
+  const [executionTime, setExecutionTime] = useState();
 
   const runCode = () => {
     setIsLoading(true);
     setIsResultVisible(false);
-    const result = code.call()?.toString();
-    setResult(result);
-    setIsResultVisible(true);
-    setIsLoading(false);
+    let promise = new Promise((resolve, reject) => {
+      const startTime = performance.now();
+      const result = code.call()?.toString();
+      const endTime = performance.now();
+      setExecutionTime(endTime - startTime);
+      if (result) resolve(result);
+      else reject();
+    });
+
+    promise.then(res => {
+      setResult(res);
+    }).finally(() => {
+      setIsResultVisible(true);
+      setIsLoading(false);
+    });
   }
   
   const clear = () => {
@@ -27,23 +39,25 @@ export const CodeRunner = ({ code }) => {
     <>
       <div className={`flex mb-1 ${isResultVisible ? "justify-between" : "justify-end"}`}>
         {isResultVisible &&
-        <div className="flex bg-gray-200 w-full rounded-md px-2 mr-1">
-          <span className="my-auto">{result ? 'Success! Result Below:' : 'Failed! Check your code and try again.'}</span>
+        <div className="flex bg-gray-200 w-full rounded-md px-2">
+          <span className="my-auto">{result ? `Success! Execution time: ${executionTime}ms` : 'Failed! Check your code and try again.'}</span>
         </div>}
         <>
-          {result
-          ? <Button
+          {result &&
+          <Button
             variant="secondary"
+            className="ml-1"
             onClick={clear}
           >
             Clear
-          </Button>
-          : <Button
+          </Button>}
+          <Button
             variant="primary"
+            className="ml-1"
             onClick={runCode}
           >
             Run {isLoading && <LoadingIcon />}
-          </Button>}
+          </Button>
         </>
       </div>
       <Collapse in={isResultVisible && !!result}>
