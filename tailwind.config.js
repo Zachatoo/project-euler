@@ -3,7 +3,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
-      'xs': '540px',
+      'xs': '480px',
       'sm': '640px',
       'md': '1024px',
       'lg': '1280px',
