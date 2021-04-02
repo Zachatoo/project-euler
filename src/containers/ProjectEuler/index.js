@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import { Header, CodeSnippet, CodeRunner, Sidebar } from '../../components';
-import { problems } from '../../constants';
+import { problems, axiosOptions } from '../../constants';
 
 const DEFAULT_PROBLEM_COUNT = {
   completedProblems: 0,
@@ -12,7 +13,7 @@ const ProjectEuler = (props) => {
   const [problemCount, setProblemCount] = useState(DEFAULT_PROBLEM_COUNT);
   const [visibleProblem, setVisibleProblem] =
     useState(problems[
-      localStorage.getItem('currentProblem') - 1 || 0
+      sessionStorage.getItem('currentProblem') - 1 || 0
     ]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -25,15 +26,21 @@ const ProjectEuler = (props) => {
     });
     tempProblemCount.completedProblems = completed;
     setProblemCount(tempProblemCount);
-  }, [problems]);
+  }, []);
 
   useEffect(() => {
     toggleSidebar(false);
     if (visibleProblem)
-      localStorage.setItem('currentProblem', visibleProblem.key);
+      sessionStorage.setItem('currentProblem', visibleProblem.key);
     else
-      localStorage.removeItem('currentProblem');
+      sessionStorage.removeItem('currentProblem');
   }, [visibleProblem]);
+
+  const runCode = () => {
+    axios({...axiosOptions, url: `/problems/${visibleProblem.key}`}).then(res => {
+      console.log(res);
+    });
+  }
 
   const toggleSidebar = (state) => {
     setIsSidebarOpen(state ?? !isSidebarOpen);
@@ -58,6 +65,9 @@ const ProjectEuler = (props) => {
           <div className="text-center text-2xl pb-2">
             <span>Problem {visibleProblem.key}: </span>
             <span>{visibleProblem.title}</span>
+            {!visibleProblem.completed && (
+              <span> (WIP)</span>
+            )}
           </div>
           {visibleProblem.prompt}
           {!!visibleProblem.code &&
@@ -65,7 +75,7 @@ const ProjectEuler = (props) => {
             <CodeSnippet>
               {`${visibleProblem.codeStringified || visibleProblem.code?.toString()}`}
             </CodeSnippet>
-            <CodeRunner code={visibleProblem.code} />
+            <CodeRunner code={visibleProblem.code} runCode={runCode} />
           </div>}
         </>
         : <div>

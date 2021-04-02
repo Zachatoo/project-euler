@@ -72,11 +72,43 @@ return sum;`,
         <p>What is the largest prime factor of the number 600851475143?</p>
       </>,
     code: () => {
-      const MAX_NUM = 600851475143;
-      for(let i = Math.floor(Math.sqrt(MAX_NUM)); i >= 3; --i) {
-        if (MAX_NUM % i === 0)
-          return i;
+      const TARGET_NUM = 600851475143; // 6857
+
+      function isPrime(num) {
+        let result = num > 1;
+        for (let i = 2; i < Math.floor(Math.sqrt(num)) + 1; ++i) {
+          if (num % i === 0) {
+            result = false;
+            break;
+          }
+        }
+        return result;
       }
+
+      function isPrimeFactor(num, targetNum) {
+        console.log('checking for prime factor');
+        let result = false;
+        for (let i = 2; i <= num; ++i) {
+          if (num * i === targetNum) {
+            result = true;
+            break;
+          }
+        }
+        console.log('finished checking', result);
+        return result;
+      }
+
+      let result;
+      for(let i = Math.floor(TARGET_NUM / 2); i >= 3; --i) {
+        if (isPrime(i)) {
+          if (TARGET_NUM % i === 0) {
+            console.log('TARGET_NUM % i', TARGET_NUM % i);
+            result = i;
+            break;
+          }
+        }
+      }
+      return result;
     },
     completed: false,
   },

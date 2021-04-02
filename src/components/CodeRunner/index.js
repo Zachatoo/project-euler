@@ -3,31 +3,32 @@ import { Button, Collapse } from 'react-bootstrap';
 
 import { LoadingIcon } from '../../components';
 
-export const CodeRunner = ({ code }) => {
+export const CodeRunner = ({ code, runCode }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isResultVisible, setIsResultVisible] = useState(false);
+  // const [isResultVisible, setIsResultVisible] = useState(false);
+  const [isResultVisible, setIsResultVisible] = useState(true);
   const [result, setResult] = useState();
   const [executionTime, setExecutionTime] = useState();
 
-  const runCode = () => {
-    setIsLoading(true);
-    setIsResultVisible(false);
-    let promise = new Promise((resolve, reject) => {
-      const startTime = performance.now();
-      const result = code.call()?.toString();
-      const endTime = performance.now();
-      setExecutionTime(endTime - startTime);
-      if (result) resolve(result);
-      else reject();
-    });
+  // const runCode = () => {
+  //   setIsLoading(true);
+  //   setIsResultVisible(false);
+  //   let promise = new Promise((resolve, reject) => {
+  //     const startTime = performance.now();
+  //     const result = code.call()?.toString();
+  //     const endTime = performance.now();
+  //     setExecutionTime(endTime - startTime);
+  //     if (result) resolve(result);
+  //     else reject();
+  //   });
 
-    promise.then(res => {
-      setResult(res);
-    }).finally(() => {
-      setIsResultVisible(true);
-      setIsLoading(false);
-    });
-  }
+  //   promise.then(res => {
+  //     setResult(res);
+  //   }).finally(() => {
+  //     setIsResultVisible(true);
+  //     setIsLoading(false);
+  //   });
+  // }
   
   const clear = () => {
     setResult(null);
