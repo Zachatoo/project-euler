@@ -1,61 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
+import axios from 'axios';
 
 import { LoadingIcon } from '../../components';
+import { axiosOptions } from '../../constants';
 
-export const CodeRunner = ({ code, runCode }) => {
+export const CodeRunner = ({ code, problemNumber }) => {
   const [isLoading, setIsLoading] = useState(false);
   // const [isResultVisible, setIsResultVisible] = useState(false);
-  const [isResultVisible, setIsResultVisible] = useState(true);
+  const [isResultVisible, setIsResultVisible] = useState(false);
   const [result, setResult] = useState();
   const [executionTime, setExecutionTime] = useState();
 
-  // const runCode = () => {
-  //   setIsLoading(true);
-  //   setIsResultVisible(false);
-  //   let promise = new Promise((resolve, reject) => {
-  //     const startTime = performance.now();
-  //     const result = code.call()?.toString();
-  //     const endTime = performance.now();
-  //     setExecutionTime(endTime - startTime);
-  //     if (result) resolve(result);
-  //     else reject();
-  //   });
+  useEffect(() => {
+    setIsLoading(false);
+    setIsResultVisible(false);
+  }, [problemNumber]);
 
-  //   promise.then(res => {
-  //     setResult(res);
-  //   }).finally(() => {
-  //     setIsResultVisible(true);
-  //     setIsLoading(false);
-  //   });
-  // }
+  const _runCode = async () => {
+    setIsLoading(true);
+    setIsResultVisible(false);
+    const res = await axios({...axiosOptions, url: `/problems/${problemNumber}`});
+    setResult(res.data);
+    setIsLoading(false);
+    setIsResultVisible(true);
+  }
   
-  const clear = () => {
+  const _clear = () => {
     setResult(null);
     setIsResultVisible(false);
   }
-  useEffect(clear, [code]);
+  useEffect(_clear, [code]);
 
   return (
     <>
       <div className={`flex mb-1 ${isResultVisible ? "justify-between" : "justify-end"}`}>
         {isResultVisible &&
         <div className="flex bg-gray-200 w-full rounded-md px-2">
-          <span className="my-auto">{result ? `Success! Execution time: ${executionTime}ms` : 'Failed! Check your code and try again.'}</span>
+          {/* <span className="my-auto">{result ? `Success! Execution time: ${executionTime}ms` : 'Failed! Check your code and try again.'}</span> */}
+          <span className="my-auto">{result ? 'Success!' : 'Failed! Check your code and try again.'}</span>
         </div>}
         <>
           {result &&
           <Button
             variant="secondary"
             className="ml-1"
-            onClick={clear}
+            onClick={_clear}
           >
             Clear
           </Button>}
           <Button
             variant="primary"
             className="ml-1"
-            onClick={runCode}
+            onClick={_runCode}
           >
             Run {isLoading && <LoadingIcon />}
           </Button>

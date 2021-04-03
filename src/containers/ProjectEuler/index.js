@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import { Header, CodeSnippet, CodeRunner, Sidebar } from '../../components';
-import { problems, axiosOptions } from '../../constants';
+import { problems } from '../../constants';
 
 const DEFAULT_PROBLEM_COUNT = {
   completedProblems: 0,
@@ -29,36 +28,30 @@ const ProjectEuler = (props) => {
   }, []);
 
   useEffect(() => {
-    toggleSidebar(false);
+    _toggleSidebar(false);
     if (visibleProblem)
       sessionStorage.setItem('currentProblem', visibleProblem.key);
     else
       sessionStorage.removeItem('currentProblem');
   }, [visibleProblem]);
 
-  const runCode = () => {
-    axios({...axiosOptions, url: `/problems/${visibleProblem.key}`}).then(res => {
-      console.log(res);
-    });
-  }
-
-  const toggleSidebar = (state) => {
+  const _toggleSidebar = (state) => {
     setIsSidebarOpen(state ?? !isSidebarOpen);
   }
 
-  const selectProblem = (problem) => {
+  const _selectProblem = (problem) => {
     setVisibleProblem(problem);
-    toggleSidebar(false);
+    _toggleSidebar(false);
   }
 
   return (
     <>
       <Sidebar
         open={isSidebarOpen}
-        select={selectProblem}
-        toggle={toggleSidebar}
+        select={_selectProblem}
+        toggle={_toggleSidebar}
       />
-      <Header toggleSidebar={toggleSidebar} problemCount={problemCount} />
+      <Header toggleSidebar={_toggleSidebar} problemCount={problemCount} />
       <div className="max-w-4xl mt-20 mx-auto p-4">
         {visibleProblem ?
         <>
@@ -75,7 +68,7 @@ const ProjectEuler = (props) => {
             <CodeSnippet>
               {`${visibleProblem.codeStringified || visibleProblem.code?.toString()}`}
             </CodeSnippet>
-            <CodeRunner code={visibleProblem.code} runCode={runCode} />
+            <CodeRunner code={visibleProblem.code} problemNumber={visibleProblem.key} />
           </div>}
         </>
         : <div>
