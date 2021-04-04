@@ -8,20 +8,11 @@ export const problems = [
         The sum of these multiples is 23.</p>
         <p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
       </>,
-    code: () => {
-      const MAX_NUM = 1000;
-      let sum = 0;
-      for (let i = 1; i < MAX_NUM; ++i) {
-        if (i % 3 === 0 || i % 5 === 0)
-          sum += i;
-      }
-      return sum;
-    },
     codeStringified:
-`const MAX_NUM = 1000;
-let sum = 0;
-for (let i = 1; i < MAX_NUM; ++i) {
-  if (i % 3 === 0 || i % 5 === 0)
+`var sum = 0;
+for (var i = 1; i < 1000; ++i)
+{
+  if (i % 3 == 0 || i % 5 == 0)
     sum += i;
 }
 return sum;`,
@@ -36,26 +27,14 @@ return sum;`,
         <p className="text-center">1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...</p>
         <p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</p>
       </>,
-    code: () => {
-      const MAX_NUM = 4000000;
-      let prevNum = 1;
-      let nextNum = 1;
-      let sum = 0;
-      while (nextNum <= MAX_NUM) {
-        if (nextNum % 2 === 0)
-          sum += nextNum;
-        prevNum = nextNum - prevNum;
-        nextNum += prevNum;
-      }
-      return sum;
-    },
     codeStringified:
-`const MAX_NUM = 4000000;
-let prevNum = 1;
-let nextNum = 1;
-let sum = 0;
-while (nextNum <= MAX_NUM) {
-  if (nextNum % 2 === 0)
+`var maxNum = 4000000;
+var prevNum = 1;
+var nextNum = 1;
+var sum = 0;
+while (nextNum <= maxNum)
+{
+  if (nextNum % 2 == 0)
     sum += nextNum;
   prevNum = nextNum - prevNum;
   nextNum += prevNum;
@@ -71,45 +50,33 @@ return sum;`,
         <p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
         <p>What is the largest prime factor of the number 600851475143?</p>
       </>,
-    code: () => {
-      const TARGET_NUM = 600851475143; // 6857
+    codeStringified:
+`var targetNum = 600851475143;
 
-      function isPrime(num) {
-        let result = num > 1;
-        for (let i = 2; i < Math.floor(Math.sqrt(num)) + 1; ++i) {
-          if (num % i === 0) {
-            result = false;
-            break;
-          }
-        }
-        return result;
-      }
+static bool IsPrime(long num)
+{
+  var result = num > 1;
+  for (var i = 2; i < Math.Floor(Math.Sqrt(num)) + 1; ++i)
+  {
+    if (num % i == 0)
+    {
+      result = false;
+      break;
+    }
+  }
+  return result;
+}
 
-      function isPrimeFactor(num, targetNum) {
-        console.log('checking for prime factor');
-        let result = false;
-        for (let i = 2; i <= num; ++i) {
-          if (num * i === targetNum) {
-            result = true;
-            break;
-          }
-        }
-        console.log('finished checking', result);
-        return result;
-      }
-
-      let result;
-      for(let i = Math.floor(TARGET_NUM / 2); i >= 3; --i) {
-        if (isPrime(i)) {
-          if (TARGET_NUM % i === 0) {
-            console.log('TARGET_NUM % i', TARGET_NUM % i);
-            result = i;
-            break;
-          }
-        }
-      }
-      return result;
-    },
+for (var i = targetNum / 2; i >= 3; --i)
+{
+  if (targetNum % i == 0)
+  {
+    if (IsPrime(i))
+    {
+      return i;
+    }
+  }
+}`,
     completed: false,
   },
 ];

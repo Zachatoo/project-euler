@@ -63,12 +63,14 @@ const ProjectEuler = (props) => {
             )}
           </div>
           {visibleProblem.prompt}
-          {!!visibleProblem.code &&
+          {!!visibleProblem.codeStringified &&
           <div className="max-w-3xl mx-auto mb-1">
             <CodeSnippet>
-              {`${visibleProblem.codeStringified || visibleProblem.code?.toString()}`}
+              {visibleProblem.codeStringified}
             </CodeSnippet>
-            <CodeRunner code={visibleProblem.code} problemNumber={visibleProblem.key} />
+            {visibleProblem.completed && (
+              <CodeRunner problemNumber={visibleProblem.key} />
+            )}
           </div>}
         </>
         : <div>

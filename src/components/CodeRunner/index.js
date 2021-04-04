@@ -5,9 +5,8 @@ import axios from 'axios';
 import { LoadingIcon } from '../../components';
 import { axiosOptions } from '../../constants';
 
-export const CodeRunner = ({ code, problemNumber }) => {
+export const CodeRunner = ({ problemNumber }) => {
   const [isLoading, setIsLoading] = useState(false);
-  // const [isResultVisible, setIsResultVisible] = useState(false);
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [result, setResult] = useState();
   const [executionTime, setExecutionTime] = useState();
@@ -30,7 +29,7 @@ export const CodeRunner = ({ code, problemNumber }) => {
     setResult(null);
     setIsResultVisible(false);
   }
-  useEffect(_clear, [code]);
+  useEffect(_clear, [problemNumber]);
 
   return (
     <>
