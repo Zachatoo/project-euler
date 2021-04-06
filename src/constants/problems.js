@@ -54,32 +54,38 @@ return sum;`,
         <p>What is the largest prime factor of the number 600851475143?</p>
       </>,
     codeStringified:
-`var targetNum = 600851475143;
-
-static bool IsPrime(long num)
+`var maxNum = 600851475; // 600851475143
+var numbers = new bool[maxNum];
+for (var i = 2; i < Math.Sqrt(maxNum); ++i)
 {
-  var result = num > 1;
-  for (var i = 2; i < Math.Floor(Math.Sqrt(num)) + 1; ++i)
+  if (numbers[i] == false)
   {
-    if (num % i == 0)
+    for (var j = i * i; j < maxNum; j+=i)
     {
-      result = false;
-      break;
+      numbers[j] = true;
     }
   }
-  return result;
 }
 
-for (var i = targetNum / 2; i >= 3; --i)
+var primes = new List<long>();
+for (var i = maxNum - 1; i > 2; --i)
 {
-  if (targetNum % i == 0)
+  if (numbers[i] == false)
   {
-    if (IsPrime(i))
-    {
-      return i;
-    }
+    primes.Add(i);
   }
-}`,
+}
+
+long largestPrimeFactor = 0;
+for (var i = 0; i < primes.Count; ++i)
+{
+  if (maxNum % primes[i] == 0)
+  {
+    largestPrimeFactor = primes[i];
+    break;
+  }
+}
+return largestPrimeFactor;`,
     completed: false,
   },
   // Problem 4
