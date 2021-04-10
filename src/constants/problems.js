@@ -10,13 +10,18 @@ export const problems = [
         <p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
       </>,
     codeStringified:
-`var sum = 0;
-for (var i = 1; i < 1000; ++i)
+`public int MultiplesOfThreeAndFive(int maxNum)
 {
-  if (i % 3 == 0 || i % 5 == 0)
-    sum += i;
+  var sum = 0;
+  for (var i = 1; i < maxNum; ++i)
+  {
+    if (i % 3 == 0 || i % 5 == 0)
+      sum += i;
+  }
+  return sum;
 }
-return sum;`,
+
+return MultiplesOfThreeAndFive(1000);`,
     completed: true,
   },
   // Problem 2
@@ -30,18 +35,22 @@ return sum;`,
         <p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</p>
       </>,
     codeStringified:
-`var maxNum = 4000000;
-var prevNum = 1;
-var nextNum = 1;
-var sum = 0;
-while (nextNum <= maxNum)
+`public int EvenFibonacciNumbers(int maxNum)
 {
-  if (nextNum % 2 == 0)
-    sum += nextNum;
-  prevNum = nextNum - prevNum;
-  nextNum += prevNum;
+  var prevNum = 1;
+  var nextNum = 1;
+  var sum = 0;
+  while (nextNum <= maxNum)
+  {
+    if (nextNum % 2 == 0)
+      sum += nextNum;
+    prevNum = nextNum - prevNum;
+    nextNum += prevNum;
+  }
+  return sum;
 }
-return sum;`,
+
+return EvenFibonacciNumbers(4000000);`,
     completed: true,
   },
   // Problem 3
@@ -54,39 +63,20 @@ return sum;`,
         <p>What is the largest prime factor of the number 600851475143?</p>
       </>,
     codeStringified:
-`var maxNum = 600851475; // 600851475143
-var numbers = new bool[maxNum];
-for (var i = 2; i < Math.Sqrt(maxNum); ++i)
+`public long LargestPrimeFactor(long value, long divisor = 2)
 {
-  if (numbers[i] == false)
+  while ((value % divisor) != 0 && Math.Pow(divisor, 2) <= value)
   {
-    for (var j = i * i; j < maxNum; j+=i)
-    {
-      numbers[j] = true;
-    }
+    divisor++;
   }
+
+  return Math.Pow(divisor, 2) <= value
+    ? LargestPrimeFactor(value / divisor, divisor)
+    : value;
 }
 
-var primes = new List<long>();
-for (var i = maxNum - 1; i > 2; --i)
-{
-  if (numbers[i] == false)
-  {
-    primes.Add(i);
-  }
-}
-
-long largestPrimeFactor = 0;
-for (var i = 0; i < primes.Count; ++i)
-{
-  if (maxNum % primes[i] == 0)
-  {
-    largestPrimeFactor = primes[i];
-    break;
-  }
-}
-return largestPrimeFactor;`,
-    completed: false,
+return LargestPrimeFactor(600851475143);`,
+    completed: true,
   },
   // Problem 4
   {
