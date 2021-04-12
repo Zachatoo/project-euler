@@ -75,7 +75,11 @@ const ProjectEuler = (props) => {
             )}
             {visibleProblem.helperFunctions?.length > 0 && (
               <>
-                <span>The following helper functions were used for this solution:</span>
+                {visibleProblem.helperFunctions.length > 1 ? (
+                  <span>The following helper functions were used for this solution:</span>
+                ) : (
+                  <span>The following helper function was used for this solution:</span>
+                )}
                 {visibleProblem.helperFunctions.map(fn => (
                   <div className="max-w-3xl mx-auto my-2">
                     <CodeSnippet>

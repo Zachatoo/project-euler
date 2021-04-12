@@ -41,7 +41,7 @@ export const CodeRunner = ({ problemNumber }) => {
   }
 
   return (
-    <div className={`flex mb-1 ${isResultVisible ? "justify-between" : "justify-end"}`}>
+    <div className={`flex my-1 ${isResultVisible ? "justify-between" : "justify-end"}`}>
       <Collapse in={isResultVisible} onExited={_clear}>
         <div className="flex bg-gray-200 w-full rounded-md px-2">
           <span className="my-auto">{!errors ? `Result: ${result}` : 'Failed to reach server.'}</span>

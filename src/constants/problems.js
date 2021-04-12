@@ -1,3 +1,5 @@
+import { helpers } from './helpers';
+
 export const problems = [
   // Problem 1
   {
@@ -87,8 +89,33 @@ return LargestPrimeFactor(600851475143);`,
         <p>A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.</p>
         <p>Find the largest palindrome made from the product of two 3-digit numbers.</p>
       </>,
-    codeStringified: null,
-    completed: false,
+    codeStringified:
+`public int LargestPalindromeProduct()
+{
+  int largestPossibleFactor = 999;
+  int smallestPossibleFactor = 100;
+  int maxNum = largestPossibleFactor * largestPossibleFactor;
+
+  for (var i = maxNum; i > 0; --i)
+  {
+    if (_helperService.IsPalindrome(i.ToString()))
+    {
+      for (var j = largestPossibleFactor; j >= smallestPossibleFactor; --j)
+      {
+        for (var k = largestPossibleFactor; k >= smallestPossibleFactor; --k)
+        {
+          if (j * k == i)
+            return i;
+        }
+      }
+    }
+  }
+  return 0;
+}
+
+return LargestPalindromeProduct();`,
+    completed: true,
+    helperFunctions: [ helpers.isPalindrome ]
   },
   // Problem 5
   {
