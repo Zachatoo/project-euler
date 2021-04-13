@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Header, CodeSnippet, CodeRunner, Sidebar } from '../../components';
+import { Header, CodeSnippet, CodeRunner, ProjectDescription, Sidebar } from '../../components';
 import { problems } from '../../constants';
 
 const DEFAULT_PROBLEM_COUNT = {
@@ -91,11 +91,7 @@ const ProjectEuler = (props) => {
             )}
           </>
         ) : (
-          <div>
-            Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve.
-            Although mathematics will help you arrive at elegant and efficient methods,
-            the use of a computer and programming skills will be required to solve most problems.
-          </div>
+          <ProjectDescription />
         )}
       </div>
     </>

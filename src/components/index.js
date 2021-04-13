@@ -4,4 +4,5 @@ export * from './Header';
 export * from './Layout';
 export * from './LoadingIcon';
 export * from './Overlay';
+export * from './ProjectDescription';
 export * from './Sidebar';
