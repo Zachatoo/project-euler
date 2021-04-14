@@ -126,8 +126,28 @@ return LargestPalindromeProduct();`,
         <p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
         <p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
       </>,
-    codeStringified: null,
-    completed: false,
+    codeStringified:
+`public int SmallestMultiple(int maxNum)
+{
+  var resultFound = false;
+  var currentNum = 0;
+  while (!resultFound)
+  {
+    resultFound = true;
+    currentNum += maxNum;
+    for (var i = 2; i < maxNum; ++i)
+    {
+      if (currentNum % i != 0)
+      {
+        resultFound = false;
+        break;
+      }
+    }
+  }
+  return currentNum;
+}
+return SmallestMultiple(20);`,
+    completed: true,
   },
   // Problem 6
   {
@@ -135,15 +155,32 @@ return LargestPalindromeProduct();`,
     title: 'Sum square difference',
     prompt:
       <>
-        <p>The sum of the squares of the first ten natural numbers is,</p>
+        <p>The sum of the squares of the first ten natural numbers is:</p>
         <p className="text-center">1^2 + 2^2 + ... + 10^2 = 385</p>
-        <p>The square of the sum of the first ten natural numbers is,</p>
+        <p>The square of the sum of the first ten natural numbers is:</p>
         <p className="text-center">(1 + 2 + ... + 10)^2 = 55^2 = 3025</p>
-        <p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is <b>3025 - 385 = 2640.</b></p>
+        <p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is:</p>
+        <p className="text-center font-bold">3025 - 385 = 2640</p>
         <p>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</p>
       </>,
-    codeStringified: null,
-    completed: false,
+    codeStringified:
+`public double SumSquareDifference(int maxNum)
+{
+    double sumOfSquares = 0;
+    double sum = 0;
+
+    for (var i = 1; i <= maxNum; ++i)
+    {
+        sumOfSquares += Math.Pow(i, 2);
+        sum += i;
+    }
+
+    var squareOfSum = Math.Pow(sum, 2);
+
+    return squareOfSum - sumOfSquares;
+}
+return SumSquareDifference(100);`,
+    completed: true,
   },
   // Problem 7
   {
@@ -152,9 +189,28 @@ return LargestPalindromeProduct();`,
     prompt:
       <>
         <p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
-        <p>What is the 10 001st prime number?</p>
+        <p>What is the 10,001st prime number?</p>
       </>,
-    codeStringified: null,
+    codeStringified:
+`public long FindNthPrime(long n, long primeCount = 0, long lastPrime = 0)
+{
+    if (primeCount == n)
+        return lastPrime;
+    if (lastPrime == 0)
+        return FindNthPrime(n, ++primeCount, 2);
+
+    var num = lastPrime;
+    var divisor = 2;
+    while ((num % divisor) != 0)
+    {
+        while (divisor < Math.Sqrt(num))
+        {
+            divisor++;
+        }
+        num++;
+    }
+    return FindNthPrime(n, ++primeCount, num);
+}`,
     completed: false,
   },
 ];
