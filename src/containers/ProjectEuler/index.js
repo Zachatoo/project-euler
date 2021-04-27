@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Header, CodeSnippet, CodeRunner, ProjectDescription, Sidebar } from '../../components';
+import { useMountEffect } from '../../hooks';
 import { problems } from '../../constants';
 
 const DEFAULT_PROBLEM_COUNT = {
@@ -8,7 +9,7 @@ const DEFAULT_PROBLEM_COUNT = {
   totalProblems: 100,
 };
 
-const ProjectEuler = (props) => {
+const ProjectEuler = () => {
   const [problemCount, setProblemCount] = useState(DEFAULT_PROBLEM_COUNT);
   const [visibleProblem, setVisibleProblem] =
     useState(problems[
@@ -16,7 +17,7 @@ const ProjectEuler = (props) => {
     ]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  useEffect(() => {
+  useMountEffect(() => {
     let tempProblemCount = {...problemCount};
     let completed = 0;
     problems.forEach(problem => {
@@ -25,21 +26,21 @@ const ProjectEuler = (props) => {
     });
     tempProblemCount.completedProblems = completed;
     setProblemCount(tempProblemCount);
-  }, []);
+  });
 
   useEffect(() => {
-    _toggleSidebar(false);
+    setIsSidebarOpen(false);
     if (visibleProblem)
       sessionStorage.setItem('currentProblem', visibleProblem.key);
     else
       sessionStorage.removeItem('currentProblem');
   }, [visibleProblem]);
 
-  const _toggleSidebar = (state) => {
+  const _toggleSidebar = state => {
     setIsSidebarOpen(state ?? !isSidebarOpen);
   }
 
-  const _selectProblem = (problem) => {
+  const _selectProblem = problem => {
     setVisibleProblem(problem);
     _toggleSidebar(false);
   }
@@ -80,8 +81,8 @@ const ProjectEuler = (props) => {
                 ) : (
                   <span>The following helper function was used for this solution:</span>
                 )}
-                {visibleProblem.helperFunctions.map(fn => (
-                  <div className="max-w-3xl mx-auto my-2">
+                {visibleProblem.helperFunctions.map((fn, index) => (
+                  <div key={index} className="max-w-3xl mx-auto my-2">
                     <CodeSnippet>
                       {fn}
                     </CodeSnippet>

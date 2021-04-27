@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDocumentScrolled } from '../../hooks';
 
 export const Header = ({ toggleSidebar, problemCount }) => {
+  const [isHeaderMinified, setIsHeaderMinified] = useState(false);
+
+  useDocumentScrolled(callbackData => {
+    const { previousScrollPosition, newScrollPosition } = callbackData;
+
+    setIsHeaderMinified((isHeaderMinified) => {
+      if (!isHeaderMinified && newScrollPosition < 40)
+        return true;
+      if (isHeaderMinified && newScrollPosition > 4)
+        return false;
+      return isHeaderMinified;
+    })
+  });
+
   return (
     <>
       <div className="fixed text-center w-full h-8 top-0 bg-blue-300">
