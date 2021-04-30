@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Header, CodeSnippet, CodeRunner, ProjectDescription, Sidebar } from '../../components';
-import { useMountEffect } from '../../hooks';
+import { useMountEffect, useScroll } from '../../hooks';
 import { problems } from '../../constants';
 
 const DEFAULT_PROBLEM_COUNT = {
@@ -10,6 +10,7 @@ const DEFAULT_PROBLEM_COUNT = {
 };
 
 const ProjectEuler = () => {
+  const { direction } = useScroll();
   const [problemCount, setProblemCount] = useState(DEFAULT_PROBLEM_COUNT);
   const [visibleProblem, setVisibleProblem] =
     useState(problems[
@@ -52,8 +53,12 @@ const ProjectEuler = () => {
         select={_selectProblem}
         toggle={_toggleSidebar}
       />
-      <Header toggleSidebar={_toggleSidebar} problemCount={problemCount} />
-      <div className="max-w-4xl mx-auto p-4">
+      <Header
+        isHeaderShrunk={direction === 'down'}
+        problemCount={problemCount}
+        toggleSidebar={_toggleSidebar}
+      />
+      <div className="max-w-4xl mt-20 mb-4 mx-auto p-4">
         {visibleProblem ? (
           <>
             <div className="text-center text-2xl pb-2">

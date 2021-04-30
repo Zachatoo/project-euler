@@ -1,2 +1,2 @@
-export * from './useDocumentScrolled';
+export * from './useScroll';
 export * from './useMountEffect';

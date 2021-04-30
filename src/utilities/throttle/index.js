@@ -1,12 +1,12 @@
 export const throttle = (callback, limit) => {
-  let waiting = false;
+  let inProgress = false;
 
   return (...args) => {
-    if (!waiting) {
-      callback(args);
-      waiting = true;
+    if (!inProgress) {
+      inProgress = true;
+      callback(...args);
       setTimeout(() => {
-        waiting = false;
+        inProgress = false;
       }, limit);
     }
   }
