@@ -17,6 +17,7 @@ const ProjectEuler = () => {
       sessionStorage.getItem('currentProblem') - 1 || 0
     ]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isHeaderShrunk, setIsHeaderShrunk] = useState(false);
 
   useMountEffect(() => {
     let tempProblemCount = {...problemCount};
@@ -37,6 +38,10 @@ const ProjectEuler = () => {
       sessionStorage.removeItem('currentProblem');
   }, [visibleProblem]);
 
+  useEffect(() => {
+    setIsHeaderShrunk(direction === 'down');
+  }, [direction]);
+
   const _toggleSidebar = state => {
     setIsSidebarOpen(state ?? !isSidebarOpen);
   }
@@ -54,11 +59,11 @@ const ProjectEuler = () => {
         toggle={_toggleSidebar}
       />
       <Header
-        isHeaderShrunk={direction === 'down'}
+        isHeaderShrunk={isHeaderShrunk}
         problemCount={problemCount}
         toggleSidebar={_toggleSidebar}
       />
-      <div className="max-w-4xl mt-20 mb-4 mx-auto p-4">
+      <div className="max-w-4xl mt-14 mb-4 mx-auto py-4 px-2">
         {visibleProblem ? (
           <>
             <div className="text-center text-2xl pb-2">

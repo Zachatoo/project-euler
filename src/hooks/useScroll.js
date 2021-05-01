@@ -18,7 +18,7 @@ export const useScroll = () => {
 
       return { y, direction };
     });
-  });
+  }, []);
 
   useEffect(() => {
     const _handleDocumentScrollThrottled = throttle(_handleDocumentScroll, 50);

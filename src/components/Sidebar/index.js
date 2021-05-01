@@ -23,7 +23,7 @@ export const Sidebar = ({ open, select, toggle }) => {
             className="cursor-pointer py-2 pl-2 hover:bg-gray-200"
             onClick={() => select(problem)}
           >
-            <span>{problem.key}. {problem.title} {!problem.completed && '(WIP)'}</span>
+            <span>{problem.key}. {problem.title}{!problem.completed && ' (WIP)'}</span>
           </div>
         ))}
       </div>
