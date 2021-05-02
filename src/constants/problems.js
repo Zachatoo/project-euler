@@ -270,7 +270,7 @@ return SumSquareDifference(100);`,
         "84580156166097919133875499200524063689912560717606" +
         "05886116467109405077541002256983155200055935729725" +
         "71636269561882670428252483600823257530420752963450";
-    var largestProduct = 0;
+    long largestProduct = 0;
 
     for (var seriesEnd = seriesLength; seriesEnd <= largeNum.Length; ++seriesEnd)
     {
@@ -282,7 +282,7 @@ return SumSquareDifference(100);`,
             continue;
         }
 
-        var product = 1;
+        long product = 1;
         foreach (char c in series)
         {
             int num;
@@ -301,7 +301,7 @@ return SumSquareDifference(100);`,
     return largestProduct;
 }
 return LargestProductInASeries(13);`,
-    completed: false,
+    completed: true,
   },
   // Problem 9
   {
