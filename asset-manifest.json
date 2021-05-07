@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/project-euler/static/css/main.2a3fde45.chunk.css",
-    "main.js": "/project-euler/static/js/main.78bee42e.chunk.js",
-    "main.js.map": "/project-euler/static/js/main.78bee42e.chunk.js.map",
+    "main.css": "/project-euler/static/css/main.2b0ebb81.chunk.css",
+    "main.js": "/project-euler/static/js/main.5fe36c32.chunk.js",
+    "main.js.map": "/project-euler/static/js/main.5fe36c32.chunk.js.map",
     "runtime-main.js": "/project-euler/static/js/runtime-main.dac10a8b.js",
     "runtime-main.js.map": "/project-euler/static/js/runtime-main.dac10a8b.js.map",
     "static/js/2.a9aac4ee.chunk.js": "/project-euler/static/js/2.a9aac4ee.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.10f5f0fa.chunk.js": "/project-euler/static/js/3.10f5f0fa.chunk.js",
     "static/js/3.10f5f0fa.chunk.js.map": "/project-euler/static/js/3.10f5f0fa.chunk.js.map",
     "index.html": "/project-euler/index.html",
-    "static/css/main.2a3fde45.chunk.css.map": "/project-euler/static/css/main.2a3fde45.chunk.css.map",
+    "static/css/main.2b0ebb81.chunk.css.map": "/project-euler/static/css/main.2b0ebb81.chunk.css.map",
     "static/js/2.a9aac4ee.chunk.js.LICENSE.txt": "/project-euler/static/js/2.a9aac4ee.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.dac10a8b.js",
     "static/js/2.a9aac4ee.chunk.js",
-    "static/css/main.2a3fde45.chunk.css",
-    "static/js/main.78bee42e.chunk.js"
+    "static/css/main.2b0ebb81.chunk.css",
+    "static/js/main.5fe36c32.chunk.js"
   ]
 }
