@@ -1,6 +1,4 @@
-const baseUrl = process.env.NODE_ENV === 'production'
-  ? 'https://ieczyc27e2.execute-api.us-west-2.amazonaws.com/Production'
-  : 'https://ieczyc27e2.execute-api.us-west-2.amazonaws.com/Staging'
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const axiosOptions = {
   baseURL: baseUrl,
